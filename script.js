@@ -176,11 +176,17 @@ audio.addEventListener('timeupdate', () => {
     currentTimeDur.innerText = parseInt(audio.currentTime);
     progress = parseInt((audio.currentTime / podcasts[index].length) * maxValueRange);
     myProgressBar.value = progress;
+    if (audio.ended) {
+        masterPlay.src=play;
+    }
 })
 
 myProgressBar.addEventListener('change', () => {
     currentTimeDur.innerText = parseInt(audio.currentTime);
     audio.currentTime = (myProgressBar.value * podcasts[index].length) / maxValueRange;
+    if (audio.ended) {
+        masterPlay.src=play;
+    }
 })
 
 timeBackward.addEventListener('click', () => {
