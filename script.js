@@ -41,10 +41,10 @@ const listing = async () => {
         <div class="text-size-2" id="creator${i}">${element.creator}</div>
         </div>
         <div class="flex f-center">
-            <span class="channels" id="channel${i}">
+            <span class="channels text-center" id="channel${i}">
             <span class="channel">${element.channel}</span>
             </span>
-            <span class="time" id="time${i}">
+            <span class="time text-center" id="time${i}">
                 <span class="timeDuration">${audioDuration}</span>
             </span>
             <span class="podcastList">
@@ -65,10 +65,10 @@ const playEvent = async () => {
     Array.from(document.getElementsByClassName("plays")).forEach((element) => {
         element.addEventListener("click", async () => {
             resetplay();
-            const index = parseInt(element.id.split("y")[1]);
+            index = parseInt(element.id.split("y")[1]);
             audio.src = podcasts[index].path;
-            a = await alwaysRun();
-            if (element.src === pause) {
+            a = await alwaysRun(index);
+            if (element.src == pause) {
                 element.src = play;
                 audio.pause();
             } else {
@@ -76,9 +76,6 @@ const playEvent = async () => {
                 audio.play();
             }
             masterPlay.src = pause;
-            audio.addEventListener('loadedmetadata', () => {
-                alwaysRun(index);
-            });
         });
     });
 }
@@ -95,7 +92,7 @@ const alwaysRun = async (i) => {
     //     index=0;
     // }
     currentTimeDur.innerText = 0;
-    audio.addEventListener('loadedmetadata', () => {
+    audio.addEventListener('loadedmetadata', async () => {
         setData(i);
     });
 }
@@ -120,7 +117,7 @@ audioVolume.addEventListener('change', () => {
     volumemeter();
 })
 
-masterPlay.addEventListener('click', async() => {
+masterPlay.addEventListener('click', async () => {
     // console.log(audio.src)
     if (audio.paused || audio.currentTime <= 0) {
         audio.play();
@@ -136,11 +133,11 @@ masterPlay.addEventListener('click', async() => {
     audio.addEventListener('loadedmetadata', () => {
         alwaysRun();
     });
-    
+
 });
 
 podcastNext.addEventListener('click', async () => {
-    if (index >= podcasts.length - 1) {
+    if (index >= (podcasts.length - 1)) {
         index = 0;
     }
     else {
@@ -157,7 +154,7 @@ podcastNext.addEventListener('click', async () => {
 
 podcastPrevious.addEventListener('click', async () => {
     if (index <= 0) {
-        index = podcasts.length - 1;
+        index = (podcasts.length - 1);
     }
     else {
         index -= 1;
@@ -177,17 +174,17 @@ audio.addEventListener('timeupdate', () => {
     progress = parseInt((audio.currentTime / podcasts[index].length) * maxValueRange);
     myProgressBar.value = progress;
     if (audio.ended) {
-        masterPlay.src=play;
+        masterPlay.src = play;
     }
-})
+});
 
 myProgressBar.addEventListener('change', () => {
     currentTimeDur.innerText = parseInt(audio.currentTime);
     audio.currentTime = (myProgressBar.value * podcasts[index].length) / maxValueRange;
     if (audio.ended) {
-        masterPlay.src=play;
+        masterPlay.src = play;
     }
-})
+});
 
 timeBackward.addEventListener('click', () => {
     audio.currentTime -= time;
