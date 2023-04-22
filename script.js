@@ -19,6 +19,7 @@ let podcastNext = document.getElementById('next');
 let podcastsIndex = 0;
 let time = 5;
 let index = 0;
+let lastIndex = (podcasts.length - 1);
 
 let audio = new Audio();
 audio.src = podcasts[podcastsIndex].path;
@@ -54,13 +55,17 @@ const listing = async () => {
         </div>
         </div>`;
             playEvent();
-            element.length = audioDuration;
+            element.podcastLength = audioDuration;
             currentTimeDur.innerText = 0;
-            setData(index);
+            alwaysRun(index);
         });
     });
 }
 
+// Changing cover style
+const coverStyleChange = () => {
+    podcastBanner.classList.toggle(`posChange`);
+}
 const playEvent = async () => {
     Array.from(document.getElementsByClassName("plays")).forEach((element) => {
         element.addEventListener("click", async () => {
@@ -98,13 +103,12 @@ const alwaysRun = async (i) => {
 }
 
 const setData = async (i) => {
-    // console.log();
-    timeDuration.innerText = podcasts[i].length;
+    // console.log(i)
+    timeDuration.innerText = podcasts[i].podcastLength;
     podcastTitle.innerText = podcasts[i].title;
     podcastBanner.src = podcasts[i].cover;
     podcastCreator.innerText = podcasts[i].creator;
     podcastChannel.innerText = podcasts[i].channel;
-
 }
 
 const volumemeter = () => {
@@ -116,6 +120,8 @@ listing();
 audioVolume.addEventListener('change', () => {
     volumemeter();
 })
+
+podcastBanner.addEventListener('click', coverStyleChange)
 
 masterPlay.addEventListener('click', async () => {
     // console.log(audio.src)
@@ -130,14 +136,11 @@ masterPlay.addEventListener('click', async () => {
         masterPlay.src = play;
         a = await resetplay();
     }
-    audio.addEventListener('loadedmetadata', () => {
-        alwaysRun();
-    });
-
+    a = await alwaysRun(index);
 });
 
 podcastNext.addEventListener('click', async () => {
-    if (index >= (podcasts.length - 1)) {
+    if (index >= lastIndex) {
         index = 0;
     }
     else {
@@ -154,7 +157,7 @@ podcastNext.addEventListener('click', async () => {
 
 podcastPrevious.addEventListener('click', async () => {
     if (index <= 0) {
-        index = (podcasts.length - 1);
+        index = lastIndex;
     }
     else {
         index -= 1;
@@ -171,18 +174,20 @@ podcastPrevious.addEventListener('click', async () => {
 audio.addEventListener('timeupdate', () => {
     // Update Seekbar
     currentTimeDur.innerText = parseInt(audio.currentTime);
-    progress = parseInt((audio.currentTime / podcasts[index].length) * maxValueRange);
+    progress = parseInt((audio.currentTime / podcasts[index].podcastLength) * maxValueRange);
     myProgressBar.value = progress;
     if (audio.ended) {
         masterPlay.src = play;
+        resetplay();
     }
 });
 
 myProgressBar.addEventListener('change', () => {
     currentTimeDur.innerText = parseInt(audio.currentTime);
-    audio.currentTime = (myProgressBar.value * podcasts[index].length) / maxValueRange;
+    audio.currentTime = (myProgressBar.value * podcasts[index].podcastLength) / maxValueRange;
     if (audio.ended) {
         masterPlay.src = play;
+        resetplay();
     }
 });
 
@@ -191,4 +196,26 @@ timeBackward.addEventListener('click', () => {
 });
 timeForward.addEventListener('click', () => {
     audio.currentTime += time;
+});
+
+
+
+
+// KeyboardEvent
+window.addEventListener('keydown', (event) => {
+    if (event.code == "Space") {
+        masterPlay.click();
+    }
+    else if (event.ctrlKey && event.key == "ArrowLeft") {
+        podcastPrevious.click();
+    }
+    else if (event.ctrlKey && event.key == "ArrowRight") {
+        podcastNext.click();
+    }
+    else if (event.key == "ArrowLeft") {
+        timeBackward.click();
+    }
+    else if (event.key == "ArrowRight") {
+        timeForward.click();
+    }
 });
