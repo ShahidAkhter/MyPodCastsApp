@@ -4,6 +4,8 @@ let masterPlay = document.getElementById('masterPlay');
 let myProgressBar = document.getElementById('progress-bar');
 let timeDuration = document.getElementById('time-duration');
 let currentTimeDur = document.getElementById('currentTimeDur');
+let volumeIcon = document.getElementById('volumeIcon');
+let volumeSideBar = document.getElementById('volumeSideBar');
 let audioVolume = document.getElementById('volume-bar');
 let timeBackward = document.getElementById('time_backward');
 let timeForward = document.getElementById('time_forward');
@@ -30,8 +32,8 @@ let play = `assets\\appImgs\\play-solid.svg`;
 const listing = async () => {
     podcasts.forEach((element, i) => {
         let audio = new Audio(element.path);
-        audio.addEventListener('loadedmetadata', () => {
-            let audioDuration = parseInt(audio.duration);
+        audio.addEventListener('loadedmetadata', async() => {
+            audioDuration=await getpodcastLength(audio);
             playList.innerHTML += `<div class="songItem flex f-center f-left margin-2 padding-1 bg">
         <div class="imgList flex f-center">
             <img alt="${i}" id="${i}" class="border-radius"
@@ -46,10 +48,10 @@ const listing = async () => {
             <span class="channel">${element.channel}</span>
             </span>
             <span class="time text-center" id="time${i}">
-                <span class="timeDuration">${audioDuration}</span>
+                <span class="timeDur">${audioDuration}</span>
             </span>
             <span class="podcastList">
-                <span class="timestamp"><img src="assets\\appImgs\\play-solid.svg" class="control-imgs plays" id="play${i}" alt="play"></img>
+                <span class="playnPause"><img src="assets\\appImgs\\play-solid.svg" class="control-imgs plays" id="play${i}" alt="play"></img>
                 </span>
             </span>
         </div>
@@ -57,7 +59,7 @@ const listing = async () => {
             playEvent();
             element.podcastLength = audioDuration;
             currentTimeDur.innerText = 0;
-            alwaysRun(index);
+            setData(index);
         });
     });
 }
@@ -65,6 +67,10 @@ const listing = async () => {
 // Changing cover style
 const coverStyleChange = () => {
     podcastBanner.classList.toggle(`posChange`);
+}
+const getpodcastLength=async(audio)=>{
+    let audioLength = parseInt(audio.duration);
+    return audioLength;
 }
 const playEvent = async () => {
     Array.from(document.getElementsByClassName("plays")).forEach((element) => {
@@ -116,6 +122,21 @@ const volumemeter = () => {
 }
 
 listing();
+
+volumeIcon.addEventListener('click',()=>{
+    volumeSideBar.classList.toggle(`volumePos`);
+    volumeSideBar.classList.toggle(`displayNone`);
+});
+
+window.addEventListener('click',(e)=>{
+    if (e.target.id==`volumeIcon` || e.target.id==`volumeSideBar` || e.target.id==`volume-bar`) {
+        return;
+    }
+    if (volumeSideBar.classList.contains(`volumePos`)) {
+        volumeSideBar.classList.toggle(`volumePos`);
+        volumeSideBar.classList.toggle(`displayNone`);
+    }
+});
 
 audioVolume.addEventListener('change', () => {
     volumemeter();
