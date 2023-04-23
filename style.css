@@ -59,8 +59,10 @@ img{
     border-radius: 0;
     /* cursor: default; */
 }
+
 .volume{
     width: 9vw;
+    rotate: -90deg;
 }
 
 
@@ -73,7 +75,7 @@ img{
     /* width: 60vw; */
 }
 .infoTabs{
-    width: 20vw;
+    width: 15vw;
 }
 .time, .channels{
     width: 9vw;
@@ -89,7 +91,6 @@ img{
 
 
 
-
 /* Utility classes */
 .posChange{
     position: absolute;
@@ -98,6 +99,18 @@ img{
     height: 30vmin;
     width: 30vmin;
     border-radius: 0;
+}
+.volumePos{
+    position: absolute;
+    bottom: 85px;
+    right: 6vmin;
+    width: 5vmin;
+    height: 20vmin;
+    border-radius: 0;
+    border: 1px solid black;
+}
+.displayNone{
+    display: none !important;
 }
 .flex{
     display: flex;
