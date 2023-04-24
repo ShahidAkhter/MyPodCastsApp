@@ -18,22 +18,22 @@ let podcastChannel = document.getElementById('channel');
 let podcastPrevious = document.getElementById('previous');
 let podcastNext = document.getElementById('next');
 
-let podcastsIndex = 0;
+// let podcastsIndex = 0;
 let time = 5;
 let index = 0;
 let lastIndex = (podcasts.length - 1);
 
 let audio = new Audio();
-audio.src = podcasts[podcastsIndex].path;
-audioVolume.value = maxValueRange / 2;
+audio.src = podcasts[index].path;
+audioVolume.value = maxValueRange;
 let pause = `assets\\appImgs\\pause-solid.svg`;
 let play = `assets\\appImgs\\play-solid.svg`;
 
 const listing = async () => {
     podcasts.forEach((element, i) => {
         let audio = new Audio(element.path);
-        audio.addEventListener('loadedmetadata', async() => {
-            audioDuration=await getpodcastLength(audio);
+        audio.addEventListener('loadedmetadata', async () => {
+            audioDuration = await getpodcastLength(audio);
             playList.innerHTML += `<div class="songItem flex f-center f-left margin-2 padding-1 bg">
         <div class="imgList flex f-center">
             <img alt="${i}" id="${i}" class="border-radius"
@@ -50,7 +50,7 @@ const listing = async () => {
             <span class="time text-center" id="time${i}">
                 <span class="timeDur">${audioDuration}</span>
             </span>
-            <span class="podcastList">
+            <span class="podcastList flex f-center">
                 <span class="playnPause"><img src="assets\\appImgs\\play-solid.svg" class="control-imgs plays" id="play${i}" alt="play"></img>
                 </span>
             </span>
@@ -68,7 +68,7 @@ const listing = async () => {
 const coverStyleChange = () => {
     podcastBanner.classList.toggle(`posChange`);
 }
-const getpodcastLength=async(audio)=>{
+const getpodcastLength = async (audio) => {
     let audioLength = parseInt(audio.duration);
     return audioLength;
 }
@@ -121,30 +121,7 @@ const volumemeter = () => {
     audio.volume = audioVolume.value / maxValueRange;
 }
 
-listing();
-
-volumeIcon.addEventListener('click',()=>{
-    volumeSideBar.classList.toggle(`volumePos`);
-    volumeSideBar.classList.toggle(`displayNone`);
-});
-
-window.addEventListener('click',(e)=>{
-    if (e.target.id==`volumeIcon` || e.target.id==`volumeSideBar` || e.target.id==`volume-bar`) {
-        return;
-    }
-    if (volumeSideBar.classList.contains(`volumePos`)) {
-        volumeSideBar.classList.toggle(`volumePos`);
-        volumeSideBar.classList.toggle(`displayNone`);
-    }
-});
-
-audioVolume.addEventListener('change', () => {
-    volumemeter();
-})
-
-podcastBanner.addEventListener('click', coverStyleChange)
-
-masterPlay.addEventListener('click', async () => {
+const masterPlayerFunc = async () => {
     // console.log(audio.src)
     if (audio.paused || audio.currentTime <= 0) {
         audio.play();
@@ -158,6 +135,43 @@ masterPlay.addEventListener('click', async () => {
         a = await resetplay();
     }
     a = await alwaysRun(index);
+}
+
+const prevNextbtnRunner=async(index)=>{
+    a = await resetplay();
+    document.getElementById(`play${index}`).src = pause;
+    masterPlay.src = pause;
+    audio.src = podcasts[index].path?podcasts[index].path:defaultPath;
+    a = await alwaysRun(index);
+    audio.play();
+}
+
+listing();
+
+volumeIcon.addEventListener('click', () => {
+    volumeSideBar.classList.toggle(`volumePos`);
+    volumeSideBar.classList.toggle(`displayNone`);
+});
+
+window.addEventListener('click', (e) => {
+    if (e.target.id == `volumeIcon` || e.target.id == `volumeSideBar` || e.target.id == `volume-bar`) {
+        return;
+    }
+    if (volumeSideBar.classList.contains(`volumePos`)) {
+        volumeSideBar.classList.toggle(`volumePos`);
+        volumeSideBar.classList.toggle(`displayNone`);
+    }
+});
+
+
+audioVolume.addEventListener('change', () => {
+    volumemeter();
+})
+
+podcastBanner.addEventListener('click', coverStyleChange)
+
+masterPlay.addEventListener('click', async () => {
+    a = await masterPlayerFunc()
 });
 
 podcastNext.addEventListener('click', async () => {
@@ -167,12 +181,7 @@ podcastNext.addEventListener('click', async () => {
     else {
         index += 1;
     }
-    a = await resetplay();
-    document.getElementById(`play${index}`).src = pause;
-    masterPlay.src = pause;
-    audio.src = podcasts[index].path;
-    a = await alwaysRun(index);
-    audio.play();
+    prevNextbtnRunner(index);
 
 });
 
@@ -183,12 +192,7 @@ podcastPrevious.addEventListener('click', async () => {
     else {
         index -= 1;
     }
-    a = await resetplay();
-    document.getElementById(`play${index}`).src = pause;
-    masterPlay.src = pause;
-    audio.src = podcasts[index].path;
-    a = await alwaysRun(index);
-    audio.play();
+    prevNextbtnRunner(index);
 });
 
 // Listen to Events
@@ -198,8 +202,9 @@ audio.addEventListener('timeupdate', () => {
     progress = parseInt((audio.currentTime / podcasts[index].podcastLength) * maxValueRange);
     myProgressBar.value = progress;
     if (audio.ended) {
-        masterPlay.src = play;
-        resetplay();
+        podcastNext.click();
+        // masterPlay.src = play;
+        // resetplay();
     }
 });
 
