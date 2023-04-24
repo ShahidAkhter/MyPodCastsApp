@@ -1,5 +1,7 @@
 let maxValueRange = 10000;
 let playList = document.getElementById('Playlist');
+let info = document.getElementById('info');
+let expanCont = document.getElementById('expanCont');
 let masterPlay = document.getElementById('masterPlay');
 let myProgressBar = document.getElementById('progress-bar');
 let timeDuration = document.getElementById('time-duration');
@@ -34,6 +36,7 @@ const listing = async () => {
         let audio = new Audio(element.path);
         audio.addEventListener('loadedmetadata', async () => {
             audioDuration = await getpodcastLength(audio);
+            audioIntDuration = await getIntegerpodcastLength(audio);
             playList.innerHTML += `<div class="songItem flex f-center f-left margin-2 padding-1 bg">
         <div class="imgList flex f-center">
             <img alt="${i}" id="${i}" class="border-radius"
@@ -58,7 +61,7 @@ const listing = async () => {
         </div>`;
             playEvent();
             element.podcastLength = audioDuration;
-            currentTimeDur.innerText = 0;
+            element.integerLength = audioIntDuration;
             setData(index);
         });
     });
@@ -67,10 +70,43 @@ const listing = async () => {
 // Changing cover style
 const coverStyleChange = () => {
     podcastBanner.classList.toggle(`posChange`);
+    info.classList.toggle(`infoWidthChange`);
 }
 const getpodcastLength = async (audio) => {
     let audioLength = parseInt(audio.duration);
+    let min=0;
+    while(audioLength>=60){
+        audioLength-=60;
+        min+=1;
+    }
+    if (audioLength<10) {
+        audioLength=`0${audioLength}`;
+    }
+    if (min<10) {
+        min=`0${min}`;
+    }
+    audioArrangedLength=`${min}:${audioLength}`
+    return audioArrangedLength;
+}
+const getIntegerpodcastLength = async (audio) => {
+    let audioLength = parseInt(audio.duration);
     return audioLength;
+}
+const currentTimer=(audio)=>{
+    min=0;
+    current=parseInt(audio.currentTime);
+    while(current>=60){
+        current-=60;
+        min+=1;
+    }
+    if (current<10) {
+        current=`0${current}`;
+    }
+    if (min<10) {
+        min=`0${min}`;
+    }
+    audioArrangedCurrent=`${min}:${current}`
+    return audioArrangedCurrent;
 }
 const playEvent = async () => {
     Array.from(document.getElementsByClassName("plays")).forEach((element) => {
@@ -102,7 +138,7 @@ const alwaysRun = async (i) => {
     // if (!index) {
     //     index=0;
     // }
-    currentTimeDur.innerText = 0;
+    // currentTimeDur.innerText = 0;
     audio.addEventListener('loadedmetadata', async () => {
         setData(i);
     });
@@ -198,8 +234,8 @@ podcastPrevious.addEventListener('click', async () => {
 // Listen to Events
 audio.addEventListener('timeupdate', () => {
     // Update Seekbar
-    currentTimeDur.innerText = parseInt(audio.currentTime);
-    progress = parseInt((audio.currentTime / podcasts[index].podcastLength) * maxValueRange);
+    progress = parseInt((audio.currentTime / podcasts[index].integerLength) * maxValueRange);
+    currentTimeDur.innerText = currentTimer(audio);
     myProgressBar.value = progress;
     if (audio.ended) {
         podcastNext.click();
@@ -209,8 +245,8 @@ audio.addEventListener('timeupdate', () => {
 });
 
 myProgressBar.addEventListener('change', () => {
-    currentTimeDur.innerText = parseInt(audio.currentTime);
-    audio.currentTime = (myProgressBar.value * podcasts[index].podcastLength) / maxValueRange;
+    audio.currentTime = (myProgressBar.value * podcasts[index].integerLength) / maxValueRange;
+    currentTimeDur.innerText = currentTimer(audio);
     if (audio.ended) {
         masterPlay.src = play;
         resetplay();
@@ -230,6 +266,7 @@ timeForward.addEventListener('click', () => {
 // KeyboardEvent
 window.addEventListener('keydown', (event) => {
     if (event.code == "Space") {
+        event.preventDefault();
         masterPlay.click();
     }
     else if (event.ctrlKey && event.key == "ArrowLeft") {
