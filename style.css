@@ -1,31 +1,38 @@
-*{
+* {
     margin: 0;
     padding: 0;
     outline: 0;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
-html{
+
+html {
     scroll-behavior: smooth;
 }
-body{
+
+body {
     user-select: none;
 }
-img{
+
+img {
     height: 55px;
     width: 55px;
 }
 
-.myNav{
+.myNav {
+    position: fixed;
+    width: 100vw;
+    height: 40px;
     font-size: 28px;
     padding: 8px;
     border-bottom: 1px solid black;
 
 }
-.webName{
+
+.webName {
     padding-left: 12px;
 }
 
-.bottom{
+.bottom {
     position: fixed;
     bottom: 0;
     z-index: 10;
@@ -35,18 +42,20 @@ img{
     font-weight: bold;
     height: 45px;
 }
-.InnerbottomBar{
+
+.InnerbottomBar {
     width: 96vw;
 }
 
 
-.control-imgs{
+.control-imgs {
     height: 25px;
     width: 25px;
     margin: 6px;
     cursor: pointer;
 }
-.rangeInput{
+
+.rangeInput {
     width: 30vw;
     height: 6px;
     accent-color: green;
@@ -55,114 +64,155 @@ img{
     /* cursor: default; */
 }
 
-.volume{
+.volume {
     width: 9vw;
     rotate: -90deg;
 }
 
 
-.main{
+.main {
     width: auto;
+    padding-top: 60px !important;  
 }
-.songItem{
+
+.songItem {
     border: 1px solid black;
     border-radius: 4px;
     /* width: 60vw; */
 }
-.infoTabs{
+
+.infoTabs {
     width: 20vw;
 }
-.time, .channels{
+
+.infos {
+    width: 300px !important;
+}
+.others {
+    width: 340px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+}
+
+.infoWidthChange {
+    width: calc(300px + 55px) !important;
+}
+
+.time,
+.channels {
     width: 10vw;
 }
-.podcastList{
+
+.podcastList {
     width: 8vw;
 }
-.dummyComponent{
+
+.dummyComponent {
     visibility: hidden;
     height: 80vh;
     width: 2px;
     background-color: black;
 }
 
-
 @media screen and (max-width:900px) {
-    .time, .channels{
-        display: none;
-    }
-    .infoTabs{
-        width: 50vw !important;
-    }
-    .volume{
-        width: 14vh;
-    }
-    .infos,.banners{
-        display: none !important;
-    }
-    
-}
-@media screen and (max-width:700px) {
-    .text-size-1{
+    .text-size-1 {
         font-size: 0.8rem !important;
     }
-    .text-size-2{
+
+    .text-size-2 {
         font-size: 0.7rem !important;
     }
-    .volumePos{
+
+    .volumePos {
         width: 4vh;
         height: 10vh;
     }
-    .volumePos{
+
+    .volumePos {
         width: 4vh !important;
         height: 22vh !important;
     }
-    .others{
+
+    .others {
         display: none !important;
     }
-    .InnerbottomBar{
+
+    .InnerbottomBar {
         width: 92vw;
     }
-    .f-col-reverse{
+
+    .f-col-reverse {
         flex-direction: column-reverse !important;
     }
-    .rangeInput{
+
+    .rangeInput {
         width: 70vw;
     }
-}
-@media screen and (max-width:420px) {
-    .InnerbottomBar{
-        width: auto;
+    .time,
+    .channels {
+        display: none;
     }
-    .infoTabs{
+
+    .infoTabs {
         width: 50vw !important;
     }
-    .rangeInput{
+
+    .volume {
+        width: 14vh;
+    }
+
+    .infos,
+    .banners {
+        display: none !important;
+    }
+    .others {
+        width: auto !important;
+    }
+}
+
+@media screen and (max-width:420px) {
+    .InnerbottomBar {
+        width: auto;
+    }
+
+    .infoTabs {
+        width: 50vw !important;
+    }
+
+    .rangeInput {
         width: 70vw;
     }
 }
+
 @media screen and (max-width:350px) {
-    .players{
+    .players {
         width: 85vw !important;
     }
 }
+
 @media screen and (max-width:300px) {
-    .infoTabs{
+    .infoTabs {
         width: 45vw !important;
     }
 }
+
 @media screen and (max-width:285px) {
-    .players{
+    .players {
         width: 85vw !important;
     }
 }
+
 @media screen and (max-width:270px) {
-    .infoTabs{
+    .infoTabs {
         display: none;
     }
-    .podcastList{
+
+    .podcastList {
         width: 20vw;
     }
-    .podcastList{
+
+    .podcastList {
         padding-left: 20vw;
     }
 }
@@ -197,7 +247,7 @@ img{
 
 
 /* Utility classes */
-.posChange{
+.posChange {
     position: absolute;
     bottom: 86px;
     left: 0;
@@ -205,7 +255,8 @@ img{
     width: 30vmin;
     border-radius: 0;
 }
-.volumePos{
+
+.volumePos {
     position: absolute;
     bottom: 85px;
     right: auto;
@@ -213,88 +264,114 @@ img{
     height: 20vmin;
     border-radius: 0;
 }
-.border-1{
+
+.border-1 {
     border: 1px solid black;
 }
-.displayNone{
+
+.displayNone {
     display: none !important;
 }
-.border{
+
+.border {
     border: 0px solid;
 }
-.border-radius{
+
+.border-radius {
     border-radius: 4px;
 }
-.flex{
+
+.flex {
     display: flex;
 }
-.f-col{
+
+.f-col {
     flex-direction: column;
 }
-.f-center{
+
+.f-center {
     align-items: center;
     justify-content: center;
 }
-.f-left{
+
+.f-left {
     justify-content: flex-start;
 }
 
-.f-between{
+.f-between {
     justify-content: space-between;
 }
-.margin-x{
+
+.margin-x {
     margin-left: 8px;
     margin-right: 8px;
 }
-.margin-y{
+
+.margin-y {
     margin-top: 8px;
     margin-bottom: 8px;
 }
-.margin-2{
+
+.margin-2 {
     margin: 4px;
 }
-.padding-1{
+
+.padding-1 {
     padding: 8px;
 }
-.w-1{
+
+.w-1 {
     width: 30vw;
 }
-.w-2{
+
+.w-2 {
     width: auto;
 }
-.min-w-1{
+
+.min-w-1 {
     min-width: 35px;
 }
-.text-center{
+
+.text-center {
     text-align: center;
 }
-.text-left{
+
+.text-left {
     text-align: left;
 }
-.text-right{
+
+.text-right {
     text-align: right;
 }
-.text-size-1{
+
+.text-size-1 {
     font-size: 1rem;
 }
-.text-size-2{
+
+.text-size-2 {
     font-size: 0.800rem;
 }
-.font-bolder{
+
+.font-bolder {
     font-weight: bolder;
 }
-.height-sm{
+
+.height-sm {
     height: 25px;
 }
-.height-sm-2{
+
+.height-sm-2 {
     height: 20px;
 }
-.height-lg{
+
+.height-lg {
     height: 80vw;
 }
-.bg{
+
+.bg {
     background: rgb(89, 211, 64);
 }
-.bg-2{
+
+.bg-2 {
     background: rgb(201, 255, 131);
 }
