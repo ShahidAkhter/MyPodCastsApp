@@ -36,15 +36,10 @@ img{
     height: 45px;
 }
 .InnerbottomBar{
-    width: 98vw;
+    width: 96vw;
 }
 
-.border{
-    border: 0px solid;
-}
-.border-radius{
-    border-radius: 4px;
-}
+
 .control-imgs{
     height: 25px;
     width: 25px;
@@ -53,8 +48,8 @@ img{
 }
 .rangeInput{
     width: 30vw;
-    /* height: 6px; */
-    accent-color: rgb(0, 0, 0);
+    height: 6px;
+    accent-color: green;
     cursor: pointer;
     border-radius: 0;
     /* cursor: default; */
@@ -75,18 +70,92 @@ img{
     /* width: 60vw; */
 }
 .infoTabs{
-    width: 15vw;
+    width: 20vw;
 }
 .time, .channels{
-    width: 9vw;
+    width: 10vw;
 }
 .podcastList{
-    width: 4vw;
+    width: 8vw;
 }
   
 
 
-
+@media screen and (max-width:900px) {
+    .time, .channels{
+        display: none;
+    }
+    .infoTabs{
+        width: 50vw !important;
+    }
+    .volume{
+        width: 14vh;
+    }
+    .infos,.banners{
+        display: none !important;
+    }
+    
+}
+@media screen and (max-width:700px) {
+    .text-size-1{
+        font-size: 0.8rem !important;
+    }
+    .text-size-2{
+        font-size: 0.7rem !important;
+    }
+    .volumePos{
+        width: 4vh;
+        height: 10vh;
+    }
+    .volumePos{
+        width: 4vh !important;
+        height: 22vh !important;
+    }
+    .others{
+        display: none !important;
+    }
+    .InnerbottomBar{
+        width: 92vw;
+    }
+    .f-col-reverse{
+        flex-direction: column-reverse !important;
+    }
+    .rangeInput{
+        width: 70vw;
+    }
+}
+@media screen and (max-width:420px) {
+    .InnerbottomBar{
+        width: auto;
+    }
+    .infoTabs{
+        width: 50vw !important;
+    }
+    .rangeInput{
+        width: 70vw;
+    }
+}
+@media screen and (max-width:300px) {
+    .infoTabs{
+        width: 45vw !important;
+    }
+}
+@media screen and (max-width:285px) {
+    .players{
+        width: 85vw !important;
+    }
+}
+@media screen and (max-width:270px) {
+    .infoTabs{
+        display: none;
+    }
+    .podcastList{
+        width: 20vw;
+    }
+    .podcastList{
+        padding-left: 20vw;
+    }
+}
 
 
 
@@ -103,14 +172,22 @@ img{
 .volumePos{
     position: absolute;
     bottom: 85px;
-    right: 6vmin;
+    right: auto;
     width: 5vmin;
     height: 20vmin;
     border-radius: 0;
+}
+.border-1{
     border: 1px solid black;
 }
 .displayNone{
     display: none !important;
+}
+.border{
+    border: 0px solid;
+}
+.border-radius{
+    border-radius: 4px;
 }
 .flex{
     display: flex;
@@ -149,8 +226,17 @@ img{
 .w-2{
     width: auto;
 }
+.min-w-1{
+    min-width: 35px;
+}
 .text-center{
     text-align: center;
+}
+.text-left{
+    text-align: left;
+}
+.text-right{
+    text-align: right;
 }
 .text-size-1{
     font-size: 1rem;
