@@ -44,8 +44,8 @@
                     <div class="text-size-2"><span id="channel">Hello, world!</span></div>
                 </div>
             </div>
-            <div id="player-control" class="players flex f-center f-between f-col f-col-reverse">
-                <div class="flex f-center controler" id="control">
+            <div id="player-control" class="players flex f-center f-between f-col">
+                <div class="flex f-center controler posRelative" id="control">
                     <abbr title="Skip backward 5s"> <img src="assets\appImgs\rotate-left-solid.svg"
                             class="control-imgs height-sm font-bolder" id="time_backward"
                             alt="time_backward"></img></abbr>
@@ -58,13 +58,11 @@
                     <abbr title="Skip forward 5s"><img src="assets\appImgs\rotate-right-solid.svg"
                             class="control-imgs height-sm font-bolder" id="time_forward" alt="time_forward"></i></abbr>
                 </div>
-                <div class="flex f-center" id="seek">
-                    <div class="min-w-1 text-right">
-                        <span class="text-size-1" id="currentTimeDur">00:00</span>
-                    </div>
+                <div class="flex f-center f-col-reverse" id="seek">
                     <input type="range" name="range" class="rangeInput margin-x" id="progress-bar" min="0" value="0"
-                        max="10000">
-                    <div class="min-w-1 text-left">
+                    max="10000">
+                    <div class="rangeInput margin-b text-right flex f-center f-between">
+                        <span class="text-size-1" id="currentTimeDur">00:00</span>
                         <span class="text-size-1" id="time-duration">00:00</span>
                     </div>
                 </div>
