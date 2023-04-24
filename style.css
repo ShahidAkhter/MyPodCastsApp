@@ -135,6 +135,11 @@ img{
         width: 70vw;
     }
 }
+@media screen and (max-width:350px) {
+    .players{
+        width: 85vw !important;
+    }
+}
 @media screen and (max-width:300px) {
     .infoTabs{
         width: 45vw !important;
