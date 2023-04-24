@@ -34,12 +34,11 @@
 
     <!-- Footer of Audio navigator -->
     <div class="bottom flex f-center f-between bg">
-        <div class="InnerbottomBar flex f-between">
+        <div class="InnerbottomBar flex f-center f-between">
             <div class="flex f-center f-between" id="about">
-                <div class="banners flex f-left"><img id="banner"
-                    src="./assets/favicon.ico"
+                <div class="banners flex f-left"><img id="banner" src="./assets/favicon.ico"
                         class=" border-radius posChange" alt="banner"></div>
-                <div class="margin-x w-2 infos" id="info">
+                <div class="margin-x w-2 infos infoWidthChange" id="info">
                     <div class="text-size-1" id="title">Hello, world!</div>
                     <div class="text-size-2"><span id="creator">Hello, world!</span></div>
                     <div class="text-size-2"><span id="channel">Hello, world!</span></div>
@@ -61,12 +60,12 @@
                 </div>
                 <div class="flex f-center" id="seek">
                     <div class="min-w-1 text-right">
-                        <span class="text-size-1" id="currentTimeDur">0</span>
+                        <span class="text-size-1" id="currentTimeDur">00:00</span>
                     </div>
                     <input type="range" name="range" class="rangeInput margin-x" id="progress-bar" min="0" value="0"
                         max="10000">
                     <div class="min-w-1 text-left">
-                        <span class="text-size-1" id="time-duration">0</span>
+                        <span class="text-size-1" id="time-duration">00:00</span>
                     </div>
                 </div>
             </div>
@@ -74,7 +73,8 @@
                 <abbr title="volume"><img src="assets\appImgs\volume-high-solid.svg" class="control-imgs"
                         id="volumeIcon" alt="volume"></abbr>
                 <div class="volumeNav displayNone bg flex f-center border-1 border-radius" id="volumeSideBar">
-                    <input type="range" name="volume" class="rangeInput volume margin-x" id="volume-bar" min="0" value="0" max="10000">
+                    <input type="range" name="volume" class="rangeInput volume margin-x" id="volume-bar" min="0"
+                        value="0" max="10000">
                 </div>
             </div>
         </div>
