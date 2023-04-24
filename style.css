@@ -72,7 +72,7 @@ img {
 
 .main {
     width: auto;
-    padding-top: 60px !important;  
+    padding-top: 60px !important;
 }
 
 .songItem {
@@ -86,8 +86,9 @@ img {
 }
 
 .infos {
-    width: 300px !important;
+    width: 260px !important;
 }
+
 .others {
     width: 340px !important;
     display: flex !important;
@@ -96,7 +97,7 @@ img {
 }
 
 .infoWidthChange {
-    width: calc(300px + 55px) !important;
+    width: calc(260px + 55px) !important;
 }
 
 .time,
@@ -113,6 +114,10 @@ img {
     height: 80vh;
     width: 2px;
     background-color: black;
+}
+
+.seekTime {
+    font-size: 10px !important;
 }
 
 @media screen and (max-width:900px) {
@@ -142,13 +147,10 @@ img {
         width: 92vw;
     }
 
-    .f-col-reverse {
-        flex-direction: column-reverse !important;
-    }
-
     .rangeInput {
         width: 70vw;
     }
+
     .time,
     .channels {
         display: none;
@@ -166,11 +168,21 @@ img {
     .banners {
         display: none !important;
     }
+
     .others {
         width: auto !important;
     }
+    .players {
+        width: 85vw !important;
+    }
 }
 
+@media screen and (max-width:450px) {
+    .posRelative{
+        bottom: -4px !important;
+    }
+
+}
 @media screen and (max-width:420px) {
     .InnerbottomBar {
         width: auto;
@@ -180,26 +192,11 @@ img {
         width: 50vw !important;
     }
 
-    .rangeInput {
-        width: 70vw;
-    }
-}
-
-@media screen and (max-width:350px) {
-    .players {
-        width: 85vw !important;
-    }
 }
 
 @media screen and (max-width:300px) {
     .infoTabs {
         width: 45vw !important;
-    }
-}
-
-@media screen and (max-width:285px) {
-    .players {
-        width: 85vw !important;
     }
 }
 
@@ -247,6 +244,10 @@ img {
 
 
 /* Utility classes */
+.posRelative{
+    position: relative !important;
+    bottom: -10px;
+}
 .posChange {
     position: absolute;
     bottom: 86px;
@@ -294,6 +295,10 @@ img {
     justify-content: center;
 }
 
+.f-col-reverse {
+    flex-direction: column-reverse !important;
+}
+
 .f-left {
     justify-content: flex-start;
 }
@@ -310,6 +315,15 @@ img {
 .margin-y {
     margin-top: 8px;
     margin-bottom: 8px;
+}
+
+.margin-t {
+    margin: 0 !important;
+    margin-top: 10px !important;
+}
+.margin-b {
+    margin: 0 !important;
+    margin-bottom: 10px !important;
 }
 
 .margin-2 {
