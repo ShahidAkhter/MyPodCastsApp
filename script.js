@@ -35,7 +35,7 @@ const listing = async () => {
     podcasts.forEach((element, i) => {
         let audio = new Audio(element.path);
         audio.addEventListener('loadedmetadata', async () => {
-            audioDuration = await getpodcastLength(audio);
+            audioDuration = await getpodcastLength(audio.duration);
             audioIntDuration = await getIntegerpodcastLength(audio);
             playList.innerHTML += `<div class="songItem flex f-center f-left margin-2 padding-1 bg">
         <div class="imgList flex f-center">
@@ -72,42 +72,29 @@ const coverStyleChange = () => {
     podcastBanner.classList.toggle(`posChange`);
     info.classList.toggle(`infoWidthChange`);
 }
-const getpodcastLength = async (audio) => {
-    let audioLength = parseInt(audio.duration);
-    let min=0;
-    while(audioLength>=60){
-        audioLength-=60;
-        min+=1;
+
+const getpodcastLength = (audioLength) => {
+    let audioLen = parseInt(audioLength);
+    let min = 0;
+    while (audioLen >= 60) {
+        audioLen -= 60;
+        min += 1;
     }
-    if (audioLength<10) {
-        audioLength=`0${audioLength}`;
+    if (audioLen < 10) {
+        audioLen = `0${audioLen}`;
     }
-    if (min<10) {
-        min=`0${min}`;
+    if (min < 10) {
+        min = `0${min}`;
     }
-    audioArrangedLength=`${min}:${audioLength}`
-    return audioArrangedLength;
+    audioArrangedLen = `${min}:${audioLen}`
+    return audioArrangedLen;
 }
+
 const getIntegerpodcastLength = async (audio) => {
     let audioLength = parseInt(audio.duration);
     return audioLength;
 }
-const currentTimer=(audio)=>{
-    min=0;
-    current=parseInt(audio.currentTime);
-    while(current>=60){
-        current-=60;
-        min+=1;
-    }
-    if (current<10) {
-        current=`0${current}`;
-    }
-    if (min<10) {
-        min=`0${min}`;
-    }
-    audioArrangedCurrent=`${min}:${current}`
-    return audioArrangedCurrent;
-}
+
 const playEvent = async () => {
     Array.from(document.getElementsByClassName("plays")).forEach((element) => {
         element.addEventListener("click", async () => {
@@ -135,10 +122,6 @@ const resetplay = async () => {
 }
 
 const alwaysRun = async (i) => {
-    // if (!index) {
-    //     index=0;
-    // }
-    // currentTimeDur.innerText = 0;
     audio.addEventListener('loadedmetadata', async () => {
         setData(i);
     });
@@ -173,11 +156,11 @@ const masterPlayerFunc = async () => {
     a = await alwaysRun(index);
 }
 
-const prevNextbtnRunner=async(index)=>{
+const prevNextbtnRunner = async (index) => {
     a = await resetplay();
     document.getElementById(`play${index}`).src = pause;
     masterPlay.src = pause;
-    audio.src = podcasts[index].path?podcasts[index].path:defaultPath;
+    audio.src = podcasts[index].path ? podcasts[index].path : defaultPath;
     a = await alwaysRun(index);
     audio.play();
 }
@@ -235,7 +218,7 @@ podcastPrevious.addEventListener('click', async () => {
 audio.addEventListener('timeupdate', () => {
     // Update Seekbar
     progress = parseInt((audio.currentTime / podcasts[index].integerLength) * maxValueRange);
-    currentTimeDur.innerText = currentTimer(audio);
+    currentTimeDur.innerText = getpodcastLength(audio.currentTime);
     myProgressBar.value = progress;
     if (audio.ended) {
         podcastNext.click();
@@ -246,7 +229,7 @@ audio.addEventListener('timeupdate', () => {
 
 myProgressBar.addEventListener('change', () => {
     audio.currentTime = (myProgressBar.value * podcasts[index].integerLength) / maxValueRange;
-    currentTimeDur.innerText = currentTimer(audio);
+    currentTimeDur.innerText = getpodcastLength(audio.currentTime);
     if (audio.ended) {
         masterPlay.src = play;
         resetplay();
@@ -259,8 +242,6 @@ timeBackward.addEventListener('click', () => {
 timeForward.addEventListener('click', () => {
     audio.currentTime += time;
 });
-
-
 
 
 // KeyboardEvent
