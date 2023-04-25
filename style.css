@@ -41,6 +41,8 @@ img {
     border-top: 1px solid black;
     font-weight: bold;
     height: 45px;
+    height: 60px;
+
 }
 
 .InnerbottomBar {
@@ -73,6 +75,7 @@ img {
 .main {
     width: auto;
     padding-top: 60px !important;
+    padding-bottom: 80vh !important;
 }
 
 .songItem {
@@ -107,13 +110,6 @@ img {
 
 .podcastList {
     width: 8vw;
-}
-
-.dummyComponent {
-    visibility: hidden;
-    height: 80vh;
-    width: 2px;
-    background-color: black;
 }
 
 .seekTime {
@@ -174,6 +170,9 @@ img {
     }
     .players {
         width: 85vw !important;
+    }
+    .bottom {
+        height: 60px;
     }
 }
 
@@ -250,20 +249,20 @@ img {
 }
 .posChange {
     position: absolute;
-    bottom: 86px;
+    bottom: 101px;
     left: 0;
     height: 30vmin;
     width: 30vmin;
-    border-radius: 0;
+    border-radius: 0 !important;
 }
 
 .volumePos {
     position: absolute;
-    bottom: 85px;
+    bottom: 100px;
     right: auto;
     width: 5vmin;
     height: 20vmin;
-    border-radius: 0;
+    border-radius: 0 !important;
 }
 
 .border-1 {
