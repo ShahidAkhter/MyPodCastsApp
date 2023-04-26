@@ -1,0 +1,37 @@
+.red{
+    background: red;
+}
+.green{
+    background: green;
+}
+.blue{
+    background: blue;
+}
+.loadPart{
+    position: relative;
+    margin: 0 8px;
+    height: 6px !important;
+    width: 33.333333vw !important;
+    padding: 0;
+}
+
+.load{
+    position: fixed;
+    top: 0 !important;
+    left: -100vw;
+    z-index: 12 !important;
+    border: 0 !important;
+    /* display: flex; */
+    align-self: center;
+}
+.loadAnimator{
+    animation: loadingBar 4s linear 1s infinite alternate both;
+}
+@keyframes loadingBar {
+    0%{
+        left:-100vw;
+    }
+    100%{
+        left: 110vw;
+    }
+}

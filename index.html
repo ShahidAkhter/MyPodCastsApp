@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Podcasts</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/loader.css">
+    <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon">
+</head>
+
+<body class="bg-2">
+    <!-- Header -->
+    <div class="load z-index-max flex f-center f-left displayNone" id="myloader">
+        <div class="red loadPart"></div>
+        <div class="green loadPart"></div>
+        <div class="blue loadPart"></div>
+    </div>
+    <nav id="navbar" class="myNav font-bolder flex f-center f-left bg">
+        <div class="webName flex f-center f-left margin-x">MyPodcasts</div>
+        <!-- <div class="navOptions flex f-center f-left">
+            <div class="text-size-1 margin-x">Home</div>
+            <div class="text-size-1 margin-x">About</div>
+        </div> -->
+    </nav>
+
+
+
+    <div class="flex f-center f-col">
+        <div class="main flex f-center f-col margin-y margin-x font-bolder" id="Playlist">
+            <!-- Content managed by JavaScript, this is the Playlist section of this website -->
+        </div>
+    </div>
+
+
+    <!-- Footer of Audio navigator -->
+    <div class="bottom flex f-center f-between bg">
+        <div class="InnerbottomBar flex f-center f-between">
+            <div class="flex f-center f-between" id="about">
+                <div class="banners flex f-left"><img id="banner" src="./assets/favicon.ico"
+                        class=" border-radius posChange" alt="banner"></div>
+                <div class="margin-x w-2 infos infoWidthChange" id="info">
+                    <div class="text-size-1" id="title">Hello, world!</div>
+                    <div class="text-size-2"><span id="creator">Hello, world!</span></div>
+                    <div class="text-size-2"><span id="channel">Hello, world!</span></div>
+                </div>
+            </div>
+            <div id="player-control" class="players flex f-center f-between f-col">
+                <div class="flex f-center controler posRelative" id="control">
+                    <abbr title="Skip backward 5s"><img src="assets\appImgs\rotate-left-solid.svg"
+                            class="control-imgs height-sm font-bolder" id="time_backward" alt="time_backward"></abbr>
+                    <abbr title="Previous"><img src="assets\appImgs\backward-fast-solid.svg" class="control-imgs"
+                            id="previous" alt="previous"></abbr>
+                    <abbr title="Play/Pause"><img src="assets\appImgs\play-solid.svg" class="control-imgs"
+                            id="masterPlay" alt="masterPlay"></abbr>
+                    <abbr title="Next"><img src="assets\appImgs\forward-fast-solid.svg" class="control-imgs" id="next"
+                            alt="next"></abbr>
+                    <abbr title="Skip forward 5s"><img src="assets\appImgs\rotate-right-solid.svg"
+                            class="control-imgs height-sm font-bolder" id="time_forward" alt="time_forward"></abbr>
+                </div>
+                <div class="flex f-center f-col-reverse" id="seek">
+                    <input type="range" name="range" class="rangeInput margin-x" id="progress-bar" min="0" value="0"
+                        max="10000">
+                    <div class="rangeInput margin-b text-right flex f-center f-between">
+                        <span class="text-size-1" id="currentTimeDur">00:00</span>
+                        <span class="text-size-1" id="time-duration">00:00</span>
+                    </div>
+                </div>
+            </div>
+            <div id="other" class="others flex f-center f-between">
+                <abbr title="volume"><img src="assets\appImgs\volume-high-solid.svg" class="control-imgs"
+                        id="volumeIcon" alt="volume"></abbr>
+                <div class="volumeNav displayNone bg flex f-center border-1 border-radius" id="volumeSideBar">
+                    <input type="range" name="volume" class="rangeInput volume margin-x" id="volume-bar" min="0"
+                        value="0" max="10000">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="js/podcasts.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/mediaSessions.js"></script>
+</body>
+
+</html>
