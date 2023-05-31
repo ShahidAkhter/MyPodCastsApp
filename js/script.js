@@ -22,7 +22,9 @@ let podcastChannel = document.getElementById('channel');
 let podcastPrevious = document.getElementById('previous');
 let podcastNext = document.getElementById('next');
 
-// let podcastsIndex = 0;
+let captionsDisplayer = document.getElementById('captionDisplayer');
+
+let isReplay=document.getElementById('isReplay');
 let time = 5;
 let index = 0;
 let lastIndex = (podcasts.length - 1);
@@ -33,16 +35,18 @@ audioVolume.value = maxValueRange;
 let pause = `assets\\appImgs\\pause-solid.svg`;
 let play = `assets\\appImgs\\play-solid.svg`;
 
+let replayOn='Replay On'
+let replayOff='Replay Off'
 const listing = async () => {
-    a = await loadertoggle(true);
-    podcasts.forEach((element, i) => {
+    podcasts.forEach(async (element, i) => {
+        a = await loadertoggle(true);
         let audio = new Audio(element.path);
         audio.addEventListener('loadedmetadata', async () => {
-            element.podcastLength = await getpodcastLength(audio.duration);
+            element.podcastLength = await getPodcastLength(audio.duration);
             element.integerLength = await getIntegerpodcastLength(audio);
-            playList.innerHTML += `<div class="songItem flex f-center f-left margin-2 padding-1 bg">
+            playList.innerHTML += `<div class="songItem w-fit flex f-center f-left margin-2 padding-1 bg">
         <div class="imgList flex f-center">
-            <img alt="${i}" id="${i}" class="border-radius"
+            <img alt="${i}" id="${i}" class="border-radius imgCover"
             src="${element.cover}">
         </div>
         <div class="margin-x infoTabs w-1" id="infoTab${i}">
@@ -65,43 +69,44 @@ const listing = async () => {
             playEvent();
             setData(index);
         });
-        audio.addEventListener('loadedmetadata',()=>{
+        audio.addEventListener('loadedmetadata', () => {
             loadertoggle(false);
         });
     });
 }
 
 // Changing cover style
-const coverStyleChange = () => {
-    podcastBanner.classList.toggle(`posChange`);
-    info.classList.toggle(`infoWidthChange`);
-}
+// const coverStyleChange = () => {
+//     podcastBanner.classList.toggle(`posChange`);
+//     info.classList.toggle(`infoWidthChange`);
+// }
 const loadertoggle = async (bool) => {
     myloader.classList.toggle(`loadAnimator`);
     myloader.classList.toggle(`displayNone`);
     // console.log('Hello, world!');
-    playerControl.disabled=bool;
+    playerControl.disabled = bool;
 
 }
-const getpodcastLength = (audioLength) => {
-    let audioLen = parseInt(audioLength);
-    let min = 0;
-    while (audioLen >= 60) {
-        audioLen -= 60;
-        min += 1;
+const getPodcastLength = (audioLength) => {
+    let audioLen = Number.parseInt(audioLength);
+    let hours = Math.floor(audioLen / 3600);
+    let minutes = Math.floor((audioLen % 3600) / 60);
+    let seconds = audioLen % 60;
+
+    // Add leading zeros if necessary
+    let minutesStr = minutes.toString().padStart(2, '0');
+    let secondsStr = seconds.toString().padStart(2, '0');
+
+    if (hours <= 0) {
+        return `${minutesStr}:${secondsStr}`;
     }
-    if (audioLen < 10) {
-        audioLen = `0${audioLen}`;
-    }
-    if (min < 10) {
-        min = `0${min}`;
-    }
-    audioArrangedLen = `${min}:${audioLen}`
-    return audioArrangedLen;
-}
+
+    let hoursStr = hours.toString().padStart(2, '0');
+    return `${hoursStr}:${minutesStr}:${secondsStr}`;
+};
 
 const getIntegerpodcastLength = async (audio) => {
-    let audioLength = parseInt(audio.duration);
+    let audioLength = Number.parseInt(audio.duration);
     return audioLength;
 }
 
@@ -109,7 +114,7 @@ const playEvent = async () => {
     Array.from(document.getElementsByClassName("plays")).forEach((element) => {
         element.addEventListener("click", async () => {
             resetplay();
-            index = parseInt(element.id.split("y")[1]);
+            index = Number.parseInt(element.id.split("y")[1]);
             audio.src = podcasts[index].path;
             a = await alwaysRun(index);
             if (element.src == pause) {
@@ -120,6 +125,7 @@ const playEvent = async () => {
                 audio.play();
             }
             masterPlay.src = pause;
+            scrollLeftBtn.click();
         });
     });
 }
@@ -172,6 +178,7 @@ const prevNextbtnRunner = async (index) => {
     masterPlay.src = pause;
     audio.src = podcasts[index].path ? podcasts[index].path : defaultPath;
     a = await alwaysRun(index);
+    myProgressBar.value=0;
     audio.play();
 }
 
@@ -196,7 +203,10 @@ audioVolume.addEventListener('change', () => {
     volumemeter();
 })
 
-podcastBanner.addEventListener('click', coverStyleChange)
+isReplay.addEventListener('click',()=>{
+    isReplay.innerHTML=isReplay.innerHTML==replayOff?replayOn:replayOff
+})
+// podcastBanner.addEventListener('click', coverStyleChange)
 
 masterPlay.addEventListener('click', async () => {
     a = await masterPlayerFunc()
@@ -224,11 +234,15 @@ podcastPrevious.addEventListener('click', async () => {
 });
 
 // Listen to Events
-audio.addEventListener('timeupdate', () => {
+audio.addEventListener('timeupdate', async () => {
     // Update Seekbar
-    progress = parseInt((audio.currentTime / podcasts[index].integerLength) * maxValueRange);
-    currentTimeDur.innerText = getpodcastLength(audio.currentTime);
+    progress = Number.parseInt((audio.currentTime / podcasts[index].integerLength) * maxValueRange);
+    currentTimeDur.innerText = getPodcastLength(audio.currentTime);
     myProgressBar.value = progress;
+    if(isReplay.innerHTML==replayOn && audio.ended){
+        masterPlay.click();
+        return
+    }
     if (audio.ended) {
         podcastNext.click();
         // masterPlay.src = play;
@@ -236,9 +250,24 @@ audio.addEventListener('timeupdate', () => {
     }
 });
 
-myProgressBar.addEventListener('change', () => {
-    audio.currentTime = (myProgressBar.value * podcasts[index].integerLength) / maxValueRange;
-    currentTimeDur.innerText = getpodcastLength(audio.currentTime);
+audio.addEventListener('timeupdate',async()=>{
+    podcasts[index].captions.forEach((element,i) => {
+        if (podcasts[index].captions[i]["startTime"] == currentTimeDur.innerText) {
+            captionsDisplayer.innerText = podcasts[index].captions[i]["captionIs"]
+            return;
+        }
+    });
+})
+
+
+myProgressBar.addEventListener('click', (event) => {
+    const progressPercentage = event.offsetX / myProgressBar.clientWidth;
+    audio.currentTime = progressPercentage * audio.duration;
+    currentTimeDur.innerText = getPodcastLength(audio.currentTime);
+    if(isReplay.innerHTML==replayOn && audio.ended){
+        masterPlay.click();
+        return
+    }
     if (audio.ended) {
         masterPlay.src = play;
         resetplay();
@@ -265,10 +294,10 @@ window.addEventListener('keydown', (event) => {
     else if (event.ctrlKey && event.key == "ArrowRight") {
         podcastNext.click();
     }
-    else if (event.key == "ArrowLeft") {
+    else if (event.key === "ArrowLeft") {
         timeBackward.click();
     }
-    else if (event.key == "ArrowRight") {
+    else if (event.key === "ArrowRight") {
         timeForward.click();
     }
 });
