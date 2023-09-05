@@ -1,162 +1,92 @@
-const Hero_Alan_Sasha = [
-    {
-        "startTime": "00:01",
-        "endTime": "00:06",
-        "captionIs": "Been here before, it's in my muscle memory"
-    },
-    {
-        "startTime": "00:06",
-        "endTime": "00:09",
-        "captionIs": "I'm pretty sure, I recognize you"
-    },
-    {
-        "startTime": "00:09",
-        "endTime": "00:11",
-        "captionIs": "There is somethin' in your eyes"
-    },
-    {
-        "startTime": "00:11",
-        "endTime": "00:16",
-        "captionIs": "Won't let you get away tonight"
-    },
-    {
-        "startTime": "00:16",
-        "endTime": "00:19",
-        "captionIs": "You leave me in the dark"
-    },
-    {
-        "startTime": "00:19",
-        "endTime": "00:23",
-        "captionIs": "I'm stumblin' around like I'm a question mark"
-    },
-    {
-        "startTime": "00:23",
-        "endTime": "00:26",
-        "captionIs": "Wonderin' if you're around to catch me if I fall"
-    },
-    {
-        "startTime": "00:26",
-        "endTime": "00:31",
-        "captionIs": "If I come crash in to the wall"
-    },
-    {
-        "startTime": "00:31",
-        "endTime": "00:36",
-        "captionIs": "Will you light me up, jump-start my heart?"
-    },
-    {
-        "startTime": "00:36",
-        "endTime": "00:41",
-        "captionIs": "I need someone before the sun goes down"
-    },
-    {
-        "startTime": "00:41",
-        "endTime": "00:45",
-        "captionIs": "Who's gonna save me now?"
-    },
-    {
-        "startTime": "00:45",
-        "endTime": "00:48",
-        "captionIs": "Some kind of hero"
-    },
-    {
-        "startTime": "00:48",
-        "endTime": "00:53",
-        "captionIs": "I can't breathe, hopin' you're here to rescue me"
-    },
-    {
-        "startTime": "00:53",
-        "endTime": "00:56",
-        "captionIs": "Before the sun goes down"
-    },
-    {
-        "startTime": "00:56",
-        "endTime": "01:00",
-        "captionIs": "Who's gonna save me now?"
-    },
-    {
-        "startTime": "01:00",
-        "endTime": "01:03",
-        "captionIs": "Some kind of hero"
-    },
-    {
-        "startTime": "01:03",
-        "endTime": "01:18",
-        "captionIs": "♪"
-    },
-    {
-        "startTime": "01:18",
-        "endTime": "01:22",
-        "captionIs": "Been here before, it's in my muscle memory"
-    },
-    {
-        "startTime": "01:22",
-        "endTime": "01:26",
-        "captionIs": "I'm pretty sure, I've felt this energy"
-    },
-    {
-        "startTime": "01:26",
-        "endTime": "01:28",
-        "captionIs": "There's somethin' in your touch"
-    },
-    {
-        "startTime": "01:28",
-        "endTime": "01:32",
-        "captionIs": "Somethin' reminded me of us"
-    },
-    {
-        "startTime": "01:32",
-        "endTime": "01:37",
-        "captionIs": "Will you light me up, jump-start my heart?"
-    },
-    {
-        "startTime": "01:37",
-        "endTime": "01:42",
-        "captionIs": "I need someone before the sun goes down"
-    },
-    {
-        "startTime": "01:42",
-        "endTime": "01:46",
-        "captionIs": "Who's gonna save me now?"
-    },
-    {
-        "startTime": "01:46",
-        "endTime": "01:48",
-        "captionIs": "Some kind of hero"
-    },
-    {
-        "startTime": "01:48",
-        "endTime": "01:54",
-        "captionIs": "I can't breathe, hopin' you're here to rescue me"
-    },
-    {
-        "startTime": "01:54",
-        "endTime": "01:58",
-        "captionIs": "Before the sun goes down"
-    },
-    {
-        "startTime": "01:58",
-        "endTime": "02:01",
-        "captionIs": "Who's gonna save me now?"
-    },
-    {
-        "startTime": "02:01",
-        "endTime": "02:04",
-        "captionIs": "Some kind of hero"
-    },
-    {
-        "startTime": "02:04",
-        "endTime": "02:17",
-        "captionIs": "♪"
-    },
-    {
-        "startTime": "02:17",
-        "endTime": "02:19",
-        "captionIs": "Some kind of hero"
-    },
-    {
-        "startTime": "02:19",
-        "endTime": "02:51",
-        "captionIs": "♪"
-    }
-]
+const Hero_Alan_Sasha = [{
+    "1": [`Been here before, it's in my muscle memory`, 6],
+    "6": [`I'm pretty sure, I recognize you`, 9],
+    "9": [`There is somethin' in your eyes`, 11],
+    "11": [`Won't let you get away tonight`, 16],
+    "16": [`You leave me in the dark`, 19],
+    "19": [`I'm stumblin' around like I'm a question mark`, 23],
+    "23": [`Wonderin' if you're around to catch me if I fall`, 26],
+    "26": [`If I come crash into the wall`, 31],
+    "31": [`Will you light me up, jump-start my heart?`, 36],
+    "36": [`I need someone before the sun goes down`, 41],
+    "41": [`Who's gonna save me now?`, 45],
+    "45": [`Some kind of hero`, 48],
+    "48": [`I can't breathe, hopin' you're here to rescue me`, 53],
+    "53": [`Before the sun goes down`, 56],
+    "56": [`Who's gonna save me now?`, 60],
+    "60": [`Some kind of hero`, 63],
+    "63": [`♪`, 78],
+    "78": [`Been here before, it's in my muscle memory`, 82],
+    "82": [`I'm pretty sure, I've felt this energy`, 86],
+    "86": [`There's somethin' in your touch`, 88],
+    "88": [`Somethin' reminded me of us`, 92],
+    "92": [`Will you light me up, jump-start my heart?`, 97],
+    "97": [`I need someone before the sun goes down`, 102],
+    "102": [`Who's gonna save me now?`, 106],
+    "106": [`Some kind of hero`, 108],
+    "108": [`I can't breathe, hopin' you're here to rescue me`, 114],
+    "114": [`Before the sun goes down`, 118],
+    "118": [`Who's gonna save me now?`, 121],
+    "121": [`Some kind of hero`, 124],
+    "124": [`♪`, 137],
+    "137": [`Some kind of hero`, 139],
+    "139": [`♪`, 0],
+}]
+
+const Let_It_Go_Idina_Frozen = [{
+    "0": [`♪`, 0],
+    "13": [`The snow glows white on the mountain tonight`, 17],
+    "17": [`Not a footprint to be seen`, 21],
+    "21": [`A kingdom of isolation`, 24],
+    "24": [`And it looks like I'm the queen`, 28],
+    "28": [`The wind is howling like this swirling storm inside`, 35],
+    "35": [`Couldn't keep it in, heaven knows I tried`, 42],
+    "42": [`Don't let them in`, 44],
+    "44": [`Don't let them see`, 46],
+    "46": [`Be the good girl you always have to be`, 49],
+    "49": [`Conceal, don't feel`, 51],
+    "51": [`Don't let them know`, 55],
+    "55": [`Well, now they know`, 59],
+    "59": [`Let it go!`, 60],
+    "60": [`Let it go!`, 62],
+    "62": [`Can't hold it back anymore`, 66],
+    "66": [`Let it go!`, 67],
+    "66": [`Let it go!`, 70],
+    "70": [`Turn away and slam the door`, 73],
+    "73": [`I don't care`, 76],
+    "76": [`What they're going to say`, 80],
+    "80": [`Let the storm rage on`, 83],
+    "83": [`The cold never bothered me anyway`, 87],
+    "87": [`♪`, 91],
+    "91": [`It's funny how some distance`, 94],
+    "94": [`Makes everything seem small`, 98],
+    "98": [`And the fears that once controlled me`, 100],
+    "101": [`Can't get to me at all`, 105],
+    "105": [`It's time to see what I can do`, 109],
+    "109": [`To test the limits and break through`, 112],
+    "112": [`No right, no wrong, no rules for me`, 117],
+    "117": [`I'm free`, 120],
+    "120": [`Let it go!`, 122],
+    "122": [`Let it go!`, 124],
+    "124": [`I am one with the wind and sky`, 127],
+    "127": [`Let it go!`, 128],
+    "128": [`Let it go!`, 130],
+    "131": [`You'll never see me cry`, 135],
+    "135": [`Here I stand and here I'll stay`, 141],
+    "141": [`Let the storm rage on`, 145],
+    "145": [`♪`, 153],
+    "153": [`My power flurries through the air into the ground`, 160],
+    "160": [`My soul is spiraling in frozen fractals all around`, 167],
+    "167": [`And one thought crystallizes like an icy blast`, 174],
+    "174": [`I'm never going back, The past is in the past`, 181],
+    "182": [`Let it go!`, 183],
+    "183": [`Let it go!`, 185],
+    "185": [`And I'll rise like the break of dawn`, 189],
+    "189": [`Let it go!`, 190],
+    "190": [`Let it go!`, 192],
+    "193": [`That perfect girl is gone`, 196],
+    "196": [`Here I stand in the light of day`, 204],
+    "205": [`Let the storm rage on!`, 211],
+    "211": [`The cold never bothered me anyway`, 0],
+    "218": [`♪`, 0],
+}]

@@ -20,76 +20,75 @@
     </div>
     <nav id="navbar" class="myNav font-bolder flex f-center f-left bg">
         <div class="webName flex f-center f-left margin-x">MyPodcasts ♪</div>
-        <div class="navOptions flex f-center f-left">
-            <div class="text-size-1 margin-x" id="scrollLeftBtn">Banner</div>
-            <div class="text-size-1 margin-x" id="scrollRightBtn">List</div>
-            <div class="text-size-1 margin-x" id="isReplay">Replay Off</div>
-            <abbr title="volume"><img src="assets\appImgs\volume-high-solid.svg" class="control-imgs displayNone" id="volumeIcon"
-                    alt="volume"></abbr>
-            <div class="volumeNav flex f-center border-radius" id="volumeSideBar">
-                <input type="range" name="volume" class="rangeInput w-2" id="volume-bar" min="0" value="0" max="10000">
+        <div class="navOptions flex f-center f-left margin-x">
+            <div class="text-size-1 margin-x margin-t" id="isReplay">
+                <abbr title="Replayer"><img src="assets\appImgs\not-rotate-solid.svg"
+                        class="control-imgs height-sm font-bolder" alt="Replayer"></abbr>
             </div>
-            <div class="text-size-1 margin-x" id="captionDisplayer">♪</div>
         </div>
     </nav>
 
 
 
-    <div class="flex f-center f-top" id="mainContent">
-        <div class="flex f-center f-col w-full h-cover margin-1-1" id="about">
-            <div class="flex f-center f-col margin-t-1 h-cover bg border-1 border-radius">
-            <div class="border-radius flex f-center f-col margin-1-1">
-                <img class="banners" id="banner" src="./assets/favicon.ico" alt="banner">
-            </div>
-            <div class="margin-x margin-b font-bolder infos" id="info">
-                <div class="text-size-1-1" id="title">Hello, world!</div>
-                <div class="text-size-2"><span id="creator">Hello, world!</span></div>
-                <div class="text-size-2"><span id="channel">Hello, world!</span></div>
-            </div>
-            <div class="flex f-center">
-                <div class="flex f-center">
-        
-                    <div id="player-control" class="players flex f-center f-between f-col">
-                        <div class="flex f-center f-col" id="seek">
-                            <input type="range" name="range" class="rangeInput margin-x" id="progress-bar" min="0" value="0"
-                                max="10000">
-                            <div class="rangeInput margin-t text-right flex f-center f-between font-bolder">
-                                <span class="text-size-1" id="currentTimeDur">00:00</span>
-                                <span class="text-size-1" id="time-duration">00:00</span>
-                            </div>
-                        </div>
-                        <div class="flex f-center controler margin-b" id="control">
-                            <abbr title="Skip backward 5s"><img src="assets\appImgs\rotate-left-solid.svg"
-                                    class="control-imgs height-sm font-bolder" id="time_backward" alt="time_backward"></abbr>
-                            <abbr title="Previous"><img src="assets\appImgs\backward-fast-solid.svg" class="control-imgs"
-                                    id="previous" alt="previous"></abbr>
-                            <abbr title="Play/Pause"><img src="assets\appImgs\play-solid.svg" class="control-imgs"
-                                    id="masterPlay" alt="masterPlay"></abbr>
-                            <abbr title="Next"><img src="assets\appImgs\forward-fast-solid.svg" class="control-imgs" id="next"
-                                    alt="next"></abbr>
-                            <abbr title="Skip forward 5s"><img src="assets\appImgs\rotate-right-solid.svg"
-                                    class="control-imgs height-sm font-bolder" id="time_forward" alt="time_forward"></abbr>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <div class="main flex f-center f-col">
+        <div class="flex f-center f-col margin-y margin-x font-bolder text-center">
+            <div class="text-size-0 margin-x flex f-center f-left margin-2 padding-1 bg border-1 border-radius min-w-0"
+                id="captionDisplayer">♪</div>
         </div>
-        </div>
-
-        <div class="main pt-0 w-full flex f-center f-col margin-y margin-x font-bolder" id="Playlist">
+        <div class="flex f-center f-col margin-y margin-x font-bolder" id="Playlist">
             <!-- Content managed by JavaScript, this is the Playlist section of this website -->
         </div>
     </div>
 
 
     <!-- Footer of Audio navigator -->
-    
+    <div class="bottom flex f-center f-between bg">
+        <div class="InnerbottomBar flex f-center f-between">
+            <div class="flex f-center f-between" id="about">
+                <div class="banners flex f-left"><img id="banner" src="./assets/favicon.ico"
+                        class=" border-radius posChange" alt="banner"></div>
+                <div class="margin-x w-2 infos infoWidthChange" id="info">
+                    <div class="text-size-1" id="title">Hello, world!</div>
+                    <div class="text-size-2"><span id="creator">Hello, world!</span></div>
+                    <div class="text-size-2"><span id="channel">Hello, world!</span></div>
+                </div>
+            </div>
+            <div id="player-control" class="players flex f-center f-between f-col">
+                <div class="flex f-center controler posRelative" id="control">
+                    <abbr title="Skip backward 5s"><img src="assets\appImgs\rotate-left-solid.svg"
+                            class="control-imgs height-sm font-bolder" id="time_backward" alt="time_backward"></abbr>
+                    <abbr title="Previous"><img src="assets\appImgs\backward-fast-solid.svg" class="control-imgs"
+                            id="previous" alt="previous"></abbr>
+                    <abbr title="Play/Pause"><img src="assets\appImgs\play-solid.svg" class="control-imgs"
+                            id="masterPlay" alt="masterPlay"></abbr>
+                    <abbr title="Next"><img src="assets\appImgs\forward-fast-solid.svg" class="control-imgs" id="next"
+                            alt="next"></abbr>
+                    <abbr title="Skip forward 5s"><img src="assets\appImgs\rotate-right-solid.svg"
+                            class="control-imgs height-sm font-bolder" id="time_forward" alt="time_forward"></abbr>
+                </div>
+                <div class="flex f-center f-col-reverse" id="seek">
+                    <input type="range" name="range" class="rangeInput margin-x" id="progress-bar" min="0" value="0"
+                        max="10000">
+                    <div class="rangeInput margin-b text-right flex f-center f-between">
+                        <span class="text-size-1" id="currentTimeDur">00:00</span>
+                        <span class="text-size-1" id="time-duration">00:00</span>
+                    </div>
+                </div>
+            </div>
+            <div id="other" class="others flex f-center f-between">
+                <abbr title="volume"><img src="assets\appImgs\volume-high-solid.svg" class="control-imgs"
+                        id="volumeIcon" alt="volume"></abbr>
+                <div class="volumeNav displayNone bg flex f-center border-1 border-radius" id="volumeSideBar">
+                    <input type="range" name="volume" class="rangeInput volume margin-x" id="volume-bar" min="0"
+                        value="0" max="10000">
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="js/captions.js"></script>
     <script src="js/podcasts.js"></script>
-    <script src="js/bgColor.js"></script>
     <script src="js/script.js"></script>
-    <script src="js/scroll.js"></script>
     <script src="js/mediaSessions.js"></script>
 </body>
 

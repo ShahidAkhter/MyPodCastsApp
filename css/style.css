@@ -12,25 +12,21 @@ html {
 body {
     user-select: none;
     overflow-x: hidden;
-    width: 200vw !important;
 }
-.imgCover {
+
+img {
     height: 55px;
     width: 55px;
 }
 
-.banners, .infos, .rangeInput {
-    width: 54vmin;
-}
-
 .myNav {
-    position: fixed !important;
+    position: sticky !important;
     top: 0;
     width: 100vw;
-    height: 40px;
     font-size: 28px;
     padding: 8px;
     border-bottom: 1px solid black;
+
 }
 
 .webName {
@@ -63,11 +59,23 @@ body {
 }
 
 .rangeInput {
+    width: 30vw;
     height: 6px;
     accent-color: green;
     cursor: pointer;
     border-radius: 0;
     /* cursor: default; */
+}
+
+.volume {
+    width: 9vw;
+    rotate: -90deg;
+}
+
+
+.main {
+    width: auto;
+    padding-bottom: 80vh !important;
 }
 
 .songItem {
@@ -78,6 +86,17 @@ body {
 
 .infoTabs {
     width: 20vw;
+}
+
+.infos {
+    width: 260px !important;
+}
+
+.others {
+    width: 340px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
 }
 
 .infoWidthChange {
@@ -116,6 +135,19 @@ body {
         font-size: 0.7rem !important;
     }
 
+    .volumePos {
+        width: 4vh;
+        height: 10vh;
+    }
+
+    .volumePos {
+        width: 4vh !important;
+        height: 22vh !important;
+    }
+
+    .others {
+        display: none !important;
+    }
 
     .InnerbottomBar {
         width: 92vw;
@@ -136,6 +168,15 @@ body {
 
     .volume {
         width: 14vh;
+    }
+
+    .infos,
+    .banners {
+        display: none !important;
+    }
+
+    .others {
+        width: auto !important;
     }
 
     .players {
@@ -229,6 +270,15 @@ body {
     border-radius: 0 !important;
 }
 
+.volumePos {
+    position: absolute;
+    bottom: 100px;
+    right: auto;
+    width: 5vmin;
+    height: 20vmin;
+    border-radius: 0 !important;
+}
+
 .border-1 {
     border: 1px solid black;
 }
@@ -262,10 +312,6 @@ body {
     flex-direction: column-reverse !important;
 }
 
-.f-top {
-    align-items: flex-start !important;
-}
-
 .f-left {
     justify-content: flex-start;
 }
@@ -284,44 +330,22 @@ body {
     margin-bottom: 8px;
 }
 
-.margin-t-1 {
-    margin-top: 50px !important;
-}
 .margin-t {
     margin: 0 !important;
     margin-top: 10px !important;
 }
 
-.margin-1-1 {
-    margin: 20px;
-}
 .margin-b {
     margin: 0 !important;
     margin-bottom: 10px !important;
-}
-.margin-t {
-    margin: 0 !important;
-    margin-top: 10px !important;
 }
 
 .margin-2 {
     margin: 4px;
 }
 
-.pt-0 {
-    padding-top: 54px;
-}
-
 .padding-1 {
     padding: 8px;
-}
-
-.w-full {
-    width: 100vw;
-}
-
-.w-fit {
-    width: fit-content !important;
 }
 
 .w-1 {
@@ -336,8 +360,12 @@ body {
     min-width: 35px;
 }
 
+.min-w-0 {
+    min-width: 50vw;
+}
+
 .text-center {
-    text-align: center;
+    text-align: center !important;
 }
 
 .text-left {
@@ -348,11 +376,11 @@ body {
     text-align: right;
 }
 
+.text-size-0 {
+    font-size: 1.4rem;
+}
 .text-size-1 {
     font-size: 1rem;
-}
-.text-size-1-1 {
-    font-size: 1.2rem;
 }
 
 .text-size-2 {
@@ -361,10 +389,6 @@ body {
 
 .font-bolder {
     font-weight: bolder;
-}
-
-.h-cover {
-    height: fit-content;
 }
 
 .height-sm {

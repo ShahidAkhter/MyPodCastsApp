@@ -1,5 +1,27 @@
 let podcasts = [
     {
+        title: "Let It Go",
+        path: "assets\\sounds\\Idina_Menzel_-_Let_It_Go_from_Frozen.mp3",
+        cover: "assets\\covers\\Let It Go-Idina Menzel From Frozen.jpg",
+        creator: "Idina Menzel",
+        channel: "DisneyMusicVevo",
+        captions: Let_It_Go_Idina_Frozen,
+        podcastLength: "",
+        integerLength: 0,
+        bg:"rgb(201, 255, 131)"
+    },
+    {
+        title: "A Whole New World",
+        path: "assets\\sounds\\Mena_Massoud_Naomi_Scott_-_A_Whole_New_World.mp3",
+        cover: "assets\\covers\\A Whole New World-Aladdin.jpg",
+        creator: "Mena Massoud, Naomi Scott",
+        channel: "DisneyMusicVevo",
+        captions: [],
+        podcastLength: "",
+        integerLength: 0,
+        bg:"rgb(201, 255, 131)"
+    },
+    {
         title: "The Zen of Python",
         path: "assets\\sounds\\The Zen of Python.mp3",
         cover: "assets\\covers\\The Zen of Python.jpg",
