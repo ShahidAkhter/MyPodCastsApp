@@ -78,7 +78,7 @@ img {
     padding-bottom: 80vh !important;
 }
 
-.songItem {
+.songItem, .channelItems {
     border: 1px solid black;
     border-radius: 4px;
     /* width: 60vw; */
@@ -277,6 +277,10 @@ img {
     width: 5vmin;
     height: 20vmin;
     border-radius: 0 !important;
+}
+
+.cursor-pointer{
+    cursor: pointer;
 }
 
 .border-1 {

@@ -8,6 +8,7 @@
     <title>My Podcasts</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/loader.css">
+    <link rel="stylesheet" href="css/new.css">
     <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon">
 </head>
 
@@ -25,6 +26,10 @@
                 <abbr title="Replayer"><img src="assets\appImgs\not-rotate-solid.svg"
                         class="control-imgs height-sm font-bolder" alt="Replayer"></abbr>
             </div>
+            <div class="text-size-1 margin-x cursor-pointer" id="repeatTimeBegin">Start</div>
+            <div class="text-size-1 margin-x cursor-pointer" id="repeatTimeEnd">Stop</div>
+            <div class="text-size-1 margin-x cursor-pointer" id="repeatTimeExitter">XXXX</div>
+
         </div>
     </nav>
 
@@ -35,6 +40,17 @@
             <div class="text-size-0 margin-x flex f-center f-left margin-2 padding-1 bg border-1 border-radius min-w-0"
                 id="captionDisplayer">♪</div>
         </div>
+
+        <!-- <div class="outlineRange bg flex f-center m-10 w-80">
+            <abbr title="Play/Pause"><img src="assets\appImgs\play-solid.svg" class="control-imgs" id="repeatPlay"
+                    alt="masterPlay"></abbr>
+            <input type="range" name="range" class="rangeInput" id="repeat-bar" min="0" value="0" max="10000">
+            <div class="m-6 align-right flex f-center f-between">
+                <span class="text-bold" id="repeatTimeDur">00:00</span>
+                <span>/</span>
+                <span class="text-bold" id="repeat-time-duration">03:45</span>
+            </div>
+        </div> -->
         <div class="flex f-center f-col margin-y margin-x font-bolder" id="Playlist">
             <!-- Content managed by JavaScript, this is the Playlist section of this website -->
         </div>
@@ -87,8 +103,10 @@
     </div>
 
     <script src="js/captions.js"></script>
+    <script src="js/functions.js"></script>
     <script src="js/podcasts.js"></script>
-    <script src="js/script.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/reapeater.js"></script>
     <script src="js/mediaSessions.js"></script>
 </body>
 

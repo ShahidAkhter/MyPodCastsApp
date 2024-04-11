@@ -1,0 +1,7 @@
+.outlineRange{
+    padding: 2vmin 4vmin;
+    /* width: 10vmin; */
+    border: 1px solid black;
+    border-radius: 6px;
+    font-weight: 600;
+}

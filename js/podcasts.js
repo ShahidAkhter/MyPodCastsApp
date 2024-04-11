@@ -1,90 +1,136 @@
-let podcasts = [
-    {
-        title: "Let It Go",
-        path: "assets\\sounds\\Idina_Menzel_-_Let_It_Go_from_Frozen.mp3",
-        cover: "assets\\covers\\Let It Go-Idina Menzel From Frozen.jpg",
-        creator: "Idina Menzel",
-        channel: "DisneyMusicVevo",
-        captions: Let_It_Go_Idina_Frozen,
-        podcastLength: "",
-        integerLength: 0,
-        bg:"rgb(201, 255, 131)"
-    },
-    {
-        title: "A Whole New World",
-        path: "assets\\sounds\\Mena_Massoud_Naomi_Scott_-_A_Whole_New_World.mp3",
-        cover: "assets\\covers\\A Whole New World-Aladdin.jpg",
-        creator: "Mena Massoud, Naomi Scott",
-        channel: "DisneyMusicVevo",
-        captions: [],
-        podcastLength: "",
-        integerLength: 0,
-        bg:"rgb(201, 255, 131)"
-    },
-    {
-        title: "The Zen of Python",
-        path: "assets\\sounds\\The Zen of Python.mp3",
-        cover: "assets\\covers\\The Zen of Python.jpg",
-        creator: "Tim Peters, Barry Warsaw",
-        channel: "The Zbwedicon",
-        captions: [],
-        podcastLength: "",
-        integerLength: 0,
-        bg:"rgb(201, 255, 131)"
-    },
-    {
-        title: "Unstoppable",
-        path: "assets\\sounds\\Sia - Unstoppable.mp3",
-        cover: "assets\\covers\\Unstoppable.jpg",
-        creator: "Sia",
-        channel: "Sia",
-        captions: [],
-        podcastLength: "",
-        integerLength: 0,
-        bg:"rgb(201, 255, 131)"
-    },
-    {
-        title: "Grew up at midnight",
-        path: "assets\\sounds\\Grew Up At Midnight.mp3",
-        cover: "assets\\covers\\Grew Up At Midnight.jpg",
-        creator: "The Maccabees",
-        channel: "The Maccabees",
-        captions: [],
-        podcastLength: "",
-        integerLength: 0,
-        bg:"rgb(201, 255, 131)"
-    },
-    {
-        title: "On my way",
-        path: "assets\\sounds\\On My Way.mp3",
-        cover: "assets\\covers\\On My Way.jpg",
-        creator: "Alan Walker, Sabrina Carpenter & Farruko",
-        channel: "Alan Walker",
-        captions: [],
-        podcastLength: "",
-        integerLength: 0,
-        bg:"rgb(201, 255, 131)"
-    },
-    {
-        title: "Good day for dreaming",
-        path: "assets\\sounds\\Good Day For Dreaming.mp3",
-        cover: "assets\\covers\\Good Day For Dreaming.jpg",
-        creator: "Ruelle",
-        channel: "Ruelle",
-        captions: [],
-        podcastLength: "",
-        integerLength: 0,
-        bg:"rgb(201, 255, 131)"
-    },
-    {
-        title: "Hero",
-        path: "assets\\sounds\\Hero-Alan Walker&Sasha Alex Sloan.mp3",
-        cover: "assets\\covers\\Hero-AlanWalker&SashaAlexSloan.jpg",
-        creator: "Alan Walker & Sasha Alex Sloan",
-        channel: "Alan Walker",
-        captions: Hero_Alan_Sasha,
-        podcastLength: "",
-        integerLength: 0,
-        bg:"#00dcff"
-    },
-];
+const listing = async () => {
+    playList.innerHTML = ""
+    podcasts.forEach(async (element, i) => {
+        playList.innerHTML += `<div class="songItem flex f-center f-left margin-2 padding-1 bg">
+          <div class="imgList flex f-center">
+              <img alt="${i}" id="${i}" class="border-radius"
+              src="${element.cover}">
+          </div>
+          <div class="margin-x infoTabs w-1" id="infoTab${i}">
+          <div class="text-size-1" id="title${i}">${element.title}</div>
+          <div class="text-size-2" id="creator${i}">${element.creator}</div>
+          </div>
+          <div class="flex f-center">
+              <span class="channels text-center" id="channel${i}">
+              <span class="channel">${element.channel}</span>
+              </span>
+              <span class="time text-center" id="time${i}">
+                  <span class="timeDur">${element.podcastLength}</span>
+              </span>
+              <span class="podcastList flex f-center">
+                  <span class="playnPause"><img src="assets\\appImgs\\play-solid.svg" class="control-imgs plays" id="play${i}" alt="play"></img>
+                  </span>
+              </span>
+          </div>
+          </div>`;
+    });
+    podcasts.forEach(async (element, i) => {
+        let audio = new Audio(element.path);
+        loadertoggle(true);
+        audio.addEventListener('loadedmetadata', async () => {
+            element.podcastLength = await getPodcastLength(audio.duration);
+            element.integerLength = await getIntegerpodcastLength(audio);
+            document.querySelector(`#time${i} .timeDur`).innerText = `${element.podcastLength}`;
+            loadertoggle(false);
+            setData(index);
+        });
+    });
+    playEvent();
+}
+
+const fetchResponsesFromFolder = async (url, splicingNum) => {
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const htmlText = await response.text(); // This line assumes the response is HTML
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(htmlText, 'text/html');
+        const anchors = Array.from(doc.querySelectorAll('a'));
+        const hrefs = anchors.map(a => a.href);
+
+        // Remove the first splicingNum URLs
+        if (hrefs.length > splicingNum) {
+            hrefs.splice(0, splicingNum);
+        }
+        return hrefs;
+    } catch (error) {
+        console.error(`There was a problem with the fetch operation: ${error.message}`);
+        return [{ error: error.message }];
+    }
+}
+
+let podcastsList = {}
+
+const makePodcastsList = async () => {
+    try {
+        const resp = await fetchResponsesFromFolder('/media/sounds', 4);
+        let podcasts = {};
+
+        for (const e of resp) {
+            const channelsName = e.split('/').pop().replace(/%20/g, ' ');
+            const fetchFromFolder = await fetchResponsesFromFolder(e, 5);
+
+            const podcastsForChannel = fetchFromFolder.map(efol => {
+                const [fullTitle, fullCreatorsName] = efol.split('.BY.').map(name => name.replace(/%20/g, ' '));
+                const titlesName = fullTitle.split('/').pop().replace(/%20/g, ' '); // Extract only relevant title
+                const creatorsName = fullCreatorsName.split('.').slice(0, -1).join('.'); // Remove file extension
+
+                const coverFileName = efol.split('/').pop().split('.').slice(0, -1).join('.').replace(/%20/g, ' '); // Remove file extension and %20 from cover
+                const coverPath = 'media/covers/' + channelsName + '/' + coverFileName + '.jpg'; // Add ".jpg" to the cover filename
+                const pathFileName = efol.split('/').pop().replace(/%20/g, ' '); // Extract only the filename from the path and remove %20
+                const path = 'media/sounds/' + channelsName + '/' + pathFileName;
+
+                return {
+                    title: titlesName,
+                    path: path,
+                    cover: coverPath,
+                    creator: creatorsName,
+                    channel: channelsName,
+                    captions: [],
+                    podcastLength: "00:00",
+                    integerLength: 0,
+                    bg: "rgb(201, 255, 131)"
+                };
+            });
+
+            podcasts[channelsName] = podcastsForChannel;
+        }
+
+        podcastsList = { "channels": podcasts };
+        listChannels()
+    } catch (error) {
+        console.error('Error occurred:', error);
+    }
+    localStorage.setItem('podcastsList', JSON.stringify(podcastsList))
+}
+
+const listChannels = async () => {
+    Object.keys(podcastsList['channels']).forEach(async (element, i) => {
+        playList.innerHTML += `<div class="channelItem flex f-center f-left margin-2 padding-1 bg min-w-0 border-1 border-radius">
+          <div class="flex f-center">
+              <span class="channels min-w-0" id="channelList${i}">
+              <span class="channel">${element}</span>
+              </span>
+              </span>
+          </div>
+          </div>`;
+    });
+
+    Array.from(document.getElementsByClassName('channelItem')).forEach((element, i) => {
+        element.addEventListener('click', () => {
+            podcasts = podcastsList['channels'][element.innerText];
+            console.log(podcasts)
+            index = 0;
+            lastIndex = (podcasts.length - 1);
+            audio.src = podcasts[index].path;
+            listing();
+        })
+    })
+}
+
+
+
+let podcasts = []
+a = makePodcastsList();

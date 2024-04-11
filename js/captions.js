@@ -87,6 +87,6 @@ const Let_It_Go_Idina_Frozen = [{
     "193": [`That perfect girl is gone`, 196],
     "196": [`Here I stand in the light of day`, 204],
     "205": [`Let the storm rage on!`, 211],
-    "211": [`The cold never bothered me anyway`, 0],
+    "211": [`The cold never bothered me anyway`, 218],
     "218": [`♪`, 0],
 }]
