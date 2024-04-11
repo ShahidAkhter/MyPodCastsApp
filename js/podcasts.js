@@ -57,7 +57,7 @@ const fetchResponsesFromFolder = async (url, splicingNum) => {
         return hrefs;
     } catch (error) {
         console.error(`There was a problem with the fetch operation: ${error.message}`);
-        return [{ error: error.message }];
+        return 1;
     }
 }
 
@@ -66,6 +66,11 @@ let podcastsList = {}
 const makePodcastsList = async () => {
     try {
         const resp = await fetchResponsesFromFolder('/media/sounds', 4);
+        if (resp == 1) {
+            podcastsList = JSON.parse(localStorage.getItem('podcastsList'))
+            listChannels()
+            return 1;
+        }
         let podcasts = {};
 
         for (const e of resp) {
@@ -107,6 +112,15 @@ const makePodcastsList = async () => {
 }
 
 const listChannels = async () => {
+    playList.innerHTML += `<div class="flex f-center f-left margin-2 padding-1 bg min-w-0 border-1 border-radius" id="allChannelsContent">
+          <div class="flex f-center">
+              <span class="channels min-w-0">
+              <span class="channel">View All Channels Content</span>
+              </span>
+              </span>
+          </div>
+          </div>`;
+
     Object.keys(podcastsList['channels']).forEach(async (element, i) => {
         playList.innerHTML += `<div class="channelItem flex f-center f-left margin-2 padding-1 bg min-w-0 border-1 border-radius">
           <div class="flex f-center">
@@ -121,12 +135,22 @@ const listChannels = async () => {
     Array.from(document.getElementsByClassName('channelItem')).forEach((element, i) => {
         element.addEventListener('click', () => {
             podcasts = podcastsList['channels'][element.innerText];
-            console.log(podcasts)
             index = 0;
             lastIndex = (podcasts.length - 1);
             audio.src = podcasts[index].path;
             listing();
         })
+    })
+    document.getElementById('allChannelsContent').addEventListener('click', () => {
+        Object.keys(podcastsList['channels']).forEach(async (element, i) => {
+            podcastsList['channels'][element].forEach(async (e, j)=>{
+                podcasts.push(e);
+            })
+        });
+        index = 0;
+        lastIndex = (podcasts.length - 1);
+        audio.src = podcasts[index].path;
+        listing();
     })
 }
 
