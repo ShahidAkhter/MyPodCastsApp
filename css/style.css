@@ -78,7 +78,8 @@ img {
     padding-bottom: 80vh !important;
 }
 
-.songItem, .channelItems {
+.songItem,
+.channelItems {
     border: 1px solid black;
     border-radius: 4px;
     /* width: 60vw; */
@@ -256,6 +257,10 @@ img {
 
 
 /* Utility classes */
+.cursor-pointer {
+    cursor: pointer;
+}
+
 .posRelative {
     position: relative !important;
     bottom: -10px;
@@ -267,7 +272,7 @@ img {
     left: 0;
     height: 30vmin;
     width: 30vmin;
-    border-radius: 0 !important;
+    /* border-radius: 0 !important; */
 }
 
 .volumePos {
@@ -279,7 +284,7 @@ img {
     border-radius: 0 !important;
 }
 
-.cursor-pointer{
+.cursor-pointer {
     cursor: pointer;
 }
 
@@ -383,6 +388,7 @@ img {
 .text-size-0 {
     font-size: 1.4rem;
 }
+
 .text-size-1 {
     font-size: 1rem;
 }

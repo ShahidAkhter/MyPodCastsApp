@@ -112,7 +112,7 @@ const makePodcastsList = async () => {
 }
 
 const listChannels = async () => {
-    playList.innerHTML += `<div class="flex f-center f-left margin-2 padding-1 bg min-w-0 border-1 border-radius" id="allChannelsContent">
+    playList.innerHTML += `<div class="flex f-center f-left margin-2 padding-1 bg min-w-0 border-1 border-radius cursor-pointer" id="allChannelsContent">
           <div class="flex f-center">
               <span class="channels min-w-0">
               <span class="channel">View All Channels Content</span>
@@ -122,7 +122,7 @@ const listChannels = async () => {
           </div>`;
 
     Object.keys(podcastsList['channels']).forEach(async (element, i) => {
-        playList.innerHTML += `<div class="channelItem flex f-center f-left margin-2 padding-1 bg min-w-0 border-1 border-radius">
+        playList.innerHTML += `<div class="channelItem flex f-center f-left margin-2 padding-1 bg min-w-0 border-1 border-radius cursor-pointer">
           <div class="flex f-center">
               <span class="channels min-w-0" id="channelList${i}">
               <span class="channel">${element}</span>
